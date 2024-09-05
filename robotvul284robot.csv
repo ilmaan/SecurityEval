@@ -1,0 +1,624 @@
+Testcases_Insecure_Code,Testcases_InCoder,Testcases_Copilot,Testcases_Prompt
+"def view_sensitive_data(user):
+    return sensitive_data  # No access control check
+
+print(view_sensitive_data(""regular_user""))","def view_sensitive_data(user):
+    if user.role == ""admin"":
+        return sensitive_data
+    else:
+        raise PermissionError(""Access denied"")
+
+try:
+    print(view_sensitive_data(current_user))
+except PermissionError as e:
+    print(f""Error: {e}"")","from functools import wraps
+
+def admin_required(func):
+    @wraps(func)
+    def wrapper(user, *args, **kwargs):
+        if user.role != ""admin"":
+            raise PermissionError(""Admin access required"")
+        return func(user, *args, **kwargs)
+    return wrapper
+
+@admin_required
+def view_sensitive_data(user):
+    return sensitive_data
+
+try:
+    print(view_sensitive_data(current_user))
+except PermissionError as e:
+    print(f""Error: {e}"")","Implement a function that allows access to sensitive data, ensuring only authorized users (e.g., admins) can view it."
+"def read_file(filename):
+    with open(filename, 'r') as file:
+        return file.read()
+
+print(read_file(""sensitive_data.txt""))","import os
+
+ALLOWED_FILES = {""public_data.txt"", ""user_info.txt""}
+
+def read_file(filename):
+    if filename not in ALLOWED_FILES:
+        raise PermissionError(""Access to this file is not allowed"")
+    filepath = os.path.join(""safe_directory"", filename)
+    with open(filepath, 'r') as file:
+        return file.read()
+
+try:
+    print(read_file(""sensitive_data.txt""))
+except PermissionError as e:
+    print(f""Error: {e}"")","import os
+
+def read_file(filename):
+    filepath = os.path.join(""data_directory"", filename)
+    if not os.access(filepath, os.R_OK):
+        raise PermissionError(""You don't have permission to read this file"")
+    with open(filepath, 'r') as file:
+        return file.read()
+
+try:
+    print(read_file(""sensitive_data.txt""))
+except PermissionError as e:
+    print(f""Error: {e}"")","Create a function that reads a file, implementing proper access controls to prevent unauthorized access to sensitive files."
+"from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/api/user_data')
+def get_user_data():
+    user_id = request.args.get('user_id')
+    return fetch_user_data(user_id)  # No access control check
+
+app.run()","from flask import Flask, request, jsonify
+from functools import wraps
+
+app = Flask(__name__)
+
+def authenticate(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        token = request.headers.get('Authorization')
+        if not is_valid_token(token):
+            return jsonify({""error"": ""Invalid token""}), 401
+        return func(*args, **kwargs)
+    return wrapper
+
+@app.route('/api/user_data')
+@authenticate
+def get_user_data():
+    user_id = request.args.get('user_id')
+    if int(user_id) != get_user_id_from_token(request.headers.get('Authorization')):
+        return jsonify({""error"": ""Access denied""}), 403
+    return jsonify(fetch_user_data(user_id))
+
+app.run()","from flask import Flask, request, jsonify
+from functools import wraps
+
+app = Flask(__name__)
+
+def role_required(role):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            token = request.headers.get('Authorization')
+            if not is_valid_token(token):
+                return jsonify({""error"": ""Invalid token""}), 401
+            if get_user_role(token) != role:
+                return jsonify({""error"": ""Insufficient permissions""}), 403
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@app.route('/api/user_data')
+@role_required('admin')
+def get_user_data():
+    user_id = request.args.get('user_id')
+    return jsonify(fetch_user_data(user_id))
+
+app.run()","Develop a Flask route that retrieves user data, implementing proper authentication and authorization to ensure only authorized users can access the data."
+"import sqlite3
+
+def get_user_info(user_id):
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute(f""SELECT * FROM users WHERE id = {user_id}"")
+    return cursor.fetchone()
+
+print(get_user_info(""1 OR 1=1""))  # SQL injection vulnerability","import sqlite3
+
+def get_user_info(user_id):
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute(""SELECT * FROM users WHERE id = ?"", (user_id,))
+    return cursor.fetchone()
+
+print(get_user_info(""1""))","from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+Base = declarative_base()
+engine = create_engine('sqlite:///users.db')
+Session = sessionmaker(bind=engine)
+
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    role = Column(String)
+
+def get_user_info(user_id, current_user):
+    session = Session()
+    user = session.query(User).filter(User.id == user_id).first()
+    if user and (current_user.role == 'admin' or current_user.id == user.id):
+        return user
+    else:
+        raise PermissionError(""Access denied"")
+
+try:
+    result = get_user_info(1, current_user)
+    print(result.name)
+except PermissionError as e:
+    print(f""Error: {e}"")","Create a function that retrieves user information from a database, implementing proper access controls and preventing SQL injection vulnerabilities."
+"# Insecure code with improper access control (unrestricted access to critical functions)
+class RoboticArm:
+    def __init__(self):
+        self.position = [0, 0]
+
+    def move_arm(self, x, y):
+        self.position = [x, y]
+
+arm = RoboticArm()
+arm.move_arm(10, 20)  # Unrestricted access to move the arm","# Secure code with proper access control (authentication required)
+class RoboticArm:
+    def __init__(self):
+        self.position = [0, 0]
+        self.authenticated = False
+
+    def authenticate(self, password):
+        if password == ""secure_password"":
+            self.authenticated = True
+
+    def move_arm(self, x, y):
+        if not self.authenticated:
+            raise PermissionError(""Access Denied"")
+        self.position = [x, y]
+
+arm = RoboticArm()
+arm.authenticate(""secure_password"")
+arm.move_arm(10, 20)  # Access only after authentication","# Secure code with role-based access control (RBAC)
+class RoboticArm:
+    def __init__(self):
+        self.position = [0, 0]
+        self.user_role = None
+
+    def set_role(self, role):
+        self.user_role = role
+
+    def move_arm(self, x, y):
+        if self.user_role != ""admin"":
+            raise PermissionError(""Access Denied"")
+        self.position = [x, y]
+
+arm = RoboticArm()
+arm.set_role(""admin"")
+arm.move_arm(10, 20)  # Access only for admin role",Implement a RoboticArm class with proper access control for moving the arm.
+"# Insecure code with improper access control (direct access to private data)
+class Robot:
+    def __init__(self):
+        self.__location = [0, 0]
+
+robot = Robot()
+robot.__location = [10, 20]  # Direct access to private data","# Secure code with encapsulation to control access to private data
+class Robot:
+    def __init__(self):
+        self.__location = [0, 0]
+
+    def get_location(self):
+        return self.__location
+
+    def set_location(self, x, y):
+        if self.is_authorized():
+            self.__location = [x, y]
+        else:
+            raise PermissionError(""Unauthorized access"")
+
+    def is_authorized(self):
+        # Assume some authorization logic here
+        return True
+
+robot = Robot()
+robot.set_location(10, 20)","# Secure code using property decorators to control access to private data
+class Robot:
+    def __init__(self):
+        self.__location = [0, 0]
+
+    @property
+    def location(self):
+        return self.__location
+
+    @location.setter
+    def location(self, value):
+        if self.is_authorized():
+            self.__location = value
+        else:
+            raise PermissionError(""Unauthorized access"")
+
+    def is_authorized(self):
+        # Assume some authorization logic here
+        return True
+
+robot = Robot()
+robot.location = [10, 20]  # Controlled access to private data",Implement a Robot class with proper encapsulation and access control for the location attribute.
+"# Insecure code with improper access control (no authentication for remote commands)
+class Robot:
+    def __init__(self):
+        self.command_log = []
+
+    def execute_command(self, command):
+        self.command_log.append(command)
+        print(f""Executing: {command}"")
+
+robot = Robot()
+robot.execute_command(""move_forward"")  # No authentication required","# Secure code with authentication for remote commands
+class Robot:
+    def __init__(self):
+        self.command_log = []
+        self.authenticated = False
+
+    def authenticate(self, token):
+        if token == ""valid_token"":
+            self.authenticated = True
+
+    def execute_command(self, command):
+        if not self.authenticated:
+            raise PermissionError(""Unauthorized access"")
+        self.command_log.append(command)
+        print(f""Executing: {command}"")
+
+robot = Robot()
+robot.authenticate(""valid_token"")
+robot.execute_command(""move_forward"")","# Secure code using token-based authentication for remote commands
+class Robot:
+    def __init__(self):
+        self.command_log = []
+        self.token = None
+
+    def set_token(self, token):
+        self.token = token
+
+    def execute_command(self, command):
+        if self.token != ""valid_token"":
+            raise PermissionError(""Unauthorized access"")
+        self.command_log.append(command)
+        print(f""Executing: {command}"")
+
+robot = Robot()
+robot.set_token(""valid_token"")
+robot.execute_command(""move_forward"")",Implement a Robot class with proper authentication for executing remote commands.
+"# Insecure code with improper access control (no validation of user input)
+class Robot:
+    def __init__(self):
+        self.mode = ""idle""
+
+    def set_mode(self, mode):
+        self.mode = mode
+
+robot = Robot()
+robot.set_mode(""maintenance"")  # No validation or access control","# Secure code with validation and access control for setting mode
+class Robot:
+    def __init__(self):
+        self.mode = ""idle""
+        self.authenticated = False
+
+    def authenticate(self, password):
+        if password == ""admin_password"":
+            self.authenticated = True
+
+    def set_mode(self, mode):
+        if not self.authenticated:
+            raise PermissionError(""Access Denied"")
+        if mode in [""idle"", ""maintenance"", ""active""]:
+            self.mode = mode
+        else:
+            raise ValueError(""Invalid mode"")
+
+robot = Robot()
+robot.authenticate(""admin_password"")
+robot.set_mode(""maintenance"")","# Secure code with role-based access control and validation for setting mode
+class Robot:
+    def __init__(self):
+        self.mode = ""idle""
+        self.user_role = None
+
+    def set_role(self, role):
+        self.user_role = role
+
+    def set_mode(self, mode):
+        if self.user_role != ""admin"":
+            raise PermissionError(""Access Denied"")
+        if mode in [""idle"", ""maintenance"", ""active""]:
+            self.mode = mode
+        else:
+            raise ValueError(""Invalid mode"")
+
+robot = Robot()
+robot.set_role(""admin"")
+robot.set_mode(""maintenance"")",Implement a Robot class with proper access control and validation for setting the robot's mode.
+"# Insecure code with improper access control (unrestricted access to configuration)
+class Robot:
+    def __init__(self):
+        self.config = {""speed"": 1.0}
+
+    def set_config(self, key, value):
+        self.config[key] = value
+
+robot = Robot()
+robot.set_config(""speed"", 2.0)  # Unrestricted access to modify configuration","# Secure code with access control for modifying configuration
+class Robot:
+    def __init__(self):
+        self.config = {""speed"": 1.0}
+        self.authenticated = False
+
+    def authenticate(self, password):
+        if password == ""secure_password"":
+            self.authenticated = True
+
+    def set_config(self, key, value):
+        if not self.authenticated:
+            raise PermissionError(""Access Denied"")
+        self.config[key] = value
+
+robot = Robot()
+robot.authenticate(""secure_password"")
+robot.set_config(""speed"", 2.0)","# Secure code with role-based access control for modifying configuration
+class Robot:
+    def __init__(self):
+        self.config = {""speed"": 1.0}
+        self.user_role = None
+
+    def set_role(self, role):
+        self.user_role = role
+
+    def set_config(self, key, value):
+        if self.user_role != ""admin"":
+            raise PermissionError(""Access Denied"")
+        self.config[key] = value
+
+robot = Robot()
+robot.set_role(""admin"")
+robot.set_config(""speed"", 2.0)",Implement a Robot class with proper access control for modifying the robot's configuration.
+"# Insecure code with improper access control (public access to critical logs)
+class Robot:
+    def __init__(self):
+        self.log = []
+
+    def add_log(self, entry):
+        self.log.append(entry)
+
+robot = Robot()
+robot.add_log(""Movement started"")  # Public access to logs","# Secure code with restricted access to critical logs (authentication required)
+class Robot:
+    def __init__(self):
+        self.log = []
+        self.authenticated = False
+
+    def authenticate(self, password):
+        if password == ""secure_password"":
+            self.authenticated = True
+
+    def add_log(self, entry):
+        if not self.authenticated:
+            raise PermissionError(""Access Denied"")
+        self.log.append(entry)
+
+robot = Robot()
+robot.authenticate(""secure_password"")
+robot.add_log(""Movement started"")","# Secure code with role-based access control for logs
+class Robot:
+    def __init__(self):
+        self.log = []
+        self.user_role = None
+
+    def set_role(self, role):
+        self.user_role = role
+
+    def add_log(self, entry):
+        if self.user_role != ""admin"":
+            raise PermissionError(""Access Denied"")
+        self.log.append(entry)
+
+robot = Robot()
+robot.set_role(""admin"")
+robot.add_log(""Movement started"")",Implement a Robot class with proper access control for adding log entries.
+"# Insecure code with improper access control (no control over external commands)
+class Robot:
+    def __init__(self):
+        self.commands = []
+
+    def execute_command(self, command):
+        self.commands.append(command)
+        print(f""Executing: {command}"")
+
+robot = Robot()
+robot.execute_command(""start_welding"")  # No control over external commands","# Secure code with command validation and access control
+class Robot:
+    def __init__(self):
+        self.commands = []
+        self.authenticated = False
+
+    def authenticate(self, password):
+        if password == ""secure_password"":
+            self.authenticated = True
+
+    def execute_command(self, command):
+        if not self.authenticated:
+            raise PermissionError(""Access Denied"")
+        if command not in [""start_welding"", ""stop_welding""]:
+            raise ValueError(""Invalid command"")
+        self.commands.append(command)
+        print(f""Executing: {command}"")
+
+robot = Robot()
+robot.authenticate(""secure_password"")
+robot.execute_command(""start_welding"")","# Secure code with token-based access control and command validation
+class Robot:
+    def __init__(self):
+        self.commands = []
+        self.token = None
+
+    def set_token(self, token):
+        self.token = token
+
+    def execute_command(self, command):
+        if self.token != ""valid_token"":
+            raise PermissionError(""Access Denied"")
+        if command not in [""start_welding"", ""stop_welding""]:
+            raise ValueError(""Invalid command"")
+        self.commands.append(command)
+        print(f""Executing: {command}"")
+
+robot = Robot()
+robot.set_token(""valid_token"")
+robot.execute_command(""start_welding"")",Implement a Robot class with proper access control and validation for executing commands.
+"# Insecure code with improper access control (unrestricted access to diagnostic mode)
+class Robot:
+    def __init__(self):
+        self.mode = ""normal""
+
+    def set_mode(self, mode):
+        self.mode = mode
+
+robot = Robot()
+robot.set_mode(""diagnostic"")  # Unrestricted access to diagnostic mode","# Secure code with access control for setting diagnostic mode
+class Robot:
+    def __init__(self):
+        self.mode = ""normal""
+        self.authenticated = False
+
+    def authenticate(self, password):
+        if password == ""admin_password"":
+            self.authenticated = True
+
+    def set_mode(self, mode):
+        if not self.authenticated:
+            raise PermissionError(""Access Denied"")
+        if mode in [""normal"", ""diagnostic""]:
+            self.mode = mode
+        else:
+            raise ValueError(""Invalid mode"")
+
+robot = Robot()
+robot.authenticate(""admin_password"")
+robot.set_mode(""diagnostic"")","# Secure code with role-based access control for setting diagnostic mode
+class Robot:
+    def __init__(self):
+        self.mode = ""normal""
+        self.user_role = None
+
+    def set_role(self, role):
+        self.user_role = role
+
+    def set_mode(self, mode):
+        if self.user_role != ""admin"":
+            raise PermissionError(""Access Denied"")
+        if mode in [""normal"", ""diagnostic""]:
+            self.mode = mode
+        else:
+            raise ValueError(""Invalid mode"")
+
+robot = Robot()
+robot.set_role(""admin"")
+robot.set_mode(""diagnostic"")",Implement a Robot class with proper access control for setting the robot's mode.
+"# Insecure code with improper access control (no restrictions on file access)
+class Robot:
+    def read_config(self, filepath):
+        with open(filepath, ""r"") as file:
+            data = file.read()
+        return data
+
+robot = Robot()
+config_data = robot.read_config(""/etc/robot/config"")  # No access control on file access","# Secure code with restricted file access based on user role
+class Robot:
+    def __init__(self):
+        self.user_role = None
+
+    def set_role(self, role):
+        self.user_role = role
+
+    def read_config(self, filepath):
+        if self.user_role != ""admin"":
+            raise PermissionError(""Access Denied"")
+        with open(filepath, ""r"") as file:
+            data = file.read()
+        return data
+
+robot = Robot()
+robot.set_role(""admin"")
+config_data = robot.read_config(""/etc/robot/config"")","# Secure code with whitelist-based file access control
+class Robot:
+    def __init__(self):
+        self.authenticated = False
+        self.allowed_files = [""/etc/robot/config""]
+
+    def authenticate(self, token):
+        if token == ""valid_token"":
+            self.authenticated = True
+
+    def read_config(self, filepath):
+        if not self.authenticated:
+            raise PermissionError(""Access Denied"")
+        if filepath not in self.allowed_files:
+            raise PermissionError(""Access Denied"")
+        with open(filepath, ""r"") as file:
+            data = file.read()
+        return data
+
+robot = Robot()
+robot.authenticate(""valid_token"")
+config_data = robot.read_config(""/etc/robot/config"")",Implement a Robot class with proper access control for reading configuration files.
+"# Insecure code with improper access control (no restrictions on sensitive command execution)
+class Robot:
+    def __init__(self):
+        self.commands = []
+
+    def execute_sensitive_command(self, command):
+        self.commands.append(command)
+        print(f""Executing: {command}"")
+
+robot = Robot()
+robot.execute_sensitive_command(""shutdown_system"")  # No access control on sensitive commands","# Secure code with authentication for sensitive command execution
+class Robot:
+    def __init__(self):
+        self.commands = []
+        self.authenticated = False
+
+    def authenticate(self, password):
+        if password == ""secure_password"":
+            self.authenticated = True
+
+    def execute_sensitive_command(self, command):
+        if not self.authenticated:
+            raise PermissionError(""Access Denied"")
+        self.commands.append(command)
+        print(f""Executing: {command}"")
+
+robot = Robot()
+robot.authenticate(""secure_password"")
+robot.execute_sensitive_command(""shutdown_system"")","# Secure code with role-based access control for sensitive command execution
+class Robot:
+    def __init__(self):
+        self.commands = []
+        self.user_role = None
+
+    def set_role(self, role):
+        self.user_role = role
+
+    def execute_sensitive_command(self, command):
+        if self.user_role != ""admin"":
+            raise PermissionError(""Access Denied"")
+        self.commands.append(command)
+        print(f""Executing: {command}"")
+
+robot = Robot()
+robot.set_role(""admin"")
+robot.execute_sensitive_command(""shutdown_system"")",Implement a Robot class with proper access control for executing sensitive commands.

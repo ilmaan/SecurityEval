@@ -1,0 +1,322 @@
+Testcases_Insecure_Code,Testcases_InCoder,Testcases_Copilot,Testcases_Prompt
+"def authenticate_request(ip_address):
+    # Allow access if the IP address is in the trusted list
+    trusted_ips = ['192.168.1.100', '192.168.1.101']
+    if ip_address in trusted_ips:
+        return True
+    return False
+
+if authenticate_request(request.ip):
+    robot.execute_command('move_forward')","import hmac
+import hashlib
+
+def authenticate_request(token, secret_key):
+    # HMAC for token validation
+    valid_token = hmac.new(secret_key.encode(), b'robot', hashlib.sha256).hexdigest()
+    return hmac.compare_digest(token, valid_token)
+
+if authenticate_request(request.token, 'supersecretkey'):
+    robot.execute_command('move_forward')","import jwt
+
+def authenticate_request(token, secret_key):
+    try:
+        # Decode JWT and validate signature
+        payload = jwt.decode(token, secret_key, algorithms=['HS256'])
+        return True
+    except jwt.ExpiredSignatureError:
+        print(""Token expired."")
+    except jwt.InvalidTokenError:
+        print(""Invalid token."")
+    return False
+
+if authenticate_request(request.token, 'supersecretkey'):
+    robot.execute_command('move_forward')","Implement a secure authentication mechanism for a robot's move forward command, replacing insecure IP-based authentication."
+"def authenticate_user(username, password):
+    # Hard-coded password check
+    if username == ""admin"" and password == ""password123"":
+        return True
+    return False
+
+if authenticate_user(request.username, request.password):
+    robot.execute_command('activate_laser')","from werkzeug.security import check_password_hash
+
+def authenticate_user(username, password):
+    # Secure password check
+    stored_password_hash = get_password_hash_from_db(username)
+    return check_password_hash(stored_password_hash, password)
+
+if authenticate_user(request.username, request.password):
+    robot.execute_command('activate_laser')","import bcrypt
+
+def authenticate_user(username, password):
+    # Retrieve hashed password from the database
+    stored_password_hash = get_password_hash_from_db(username)
+    # Verify the password using bcrypt
+    return bcrypt.checkpw(password.encode(), stored_password_hash)
+
+if authenticate_user(request.username, request.password):
+    robot.execute_command('activate_laser')","Create a secure user authentication function for a robot's laser activation command, avoiding hard-coded passwords."
+"def authenticate_api_key(api_key):
+    # Insecure API key validation
+    valid_api_key = ""12345""
+    if api_key == valid_api_key:
+        return True
+    return False
+
+if authenticate_api_key(request.api_key):
+    robot.execute_command('open_gripper')","import hmac
+import hashlib
+
+def authenticate_api_key(api_key, secret_key):
+    # HMAC for API key validation
+    valid_key = hmac.new(secret_key.encode(), b'robot', hashlib.sha256).hexdigest()
+    return hmac.compare_digest(api_key, valid_key)
+
+if authenticate_api_key(request.api_key, 'supersecretkey'):
+    robot.execute_command('open_gripper')","def authenticate_api_key(api_key):
+    # Secure API key validation with a database lookup
+    valid_api_key = get_valid_api_key_from_db()
+    return hmac.compare_digest(api_key, valid_api_key)
+
+if authenticate_api_key(request.api_key):
+    robot.execute_command('open_gripper')","Develop a secure API key authentication method for a robot's gripper control, replacing the use of hard-coded API keys."
+"def authenticate_token(token):
+    # Simple token check
+    if token == ""secrettoken"":
+        return True
+    return False
+
+if authenticate_token(request.token):
+    robot.execute_command('rotate_arm')","import secrets
+
+def authenticate_token(token, valid_tokens):
+    # Secure token comparison
+    return secrets.compare_digest(token, valid_tokens.get(token, ''))
+
+valid_tokens = {""user1"": ""token123"", ""user2"": ""token456""}
+if authenticate_token(request.token, valid_tokens):
+    robot.execute_command('rotate_arm')","import jwt
+
+def authenticate_token(token, secret_key):
+    try:
+        # Validate JWT token
+        payload = jwt.decode(token, secret_key, algorithms=['HS256'])
+        return True
+    except jwt.InvalidTokenError:
+        return False
+
+if authenticate_token(request.token, 'supersecretkey'):
+    robot.execute_command('rotate_arm')","Implement a secure token-based authentication system for a robot's arm rotation command, avoiding the use of static tokens."
+"def store_password(username, password):
+    # Insecure password storage
+    with open('passwords.txt', 'a') as file:
+        file.write(f""{username}:{password}\n"")
+
+store_password('admin', 'password123')","import bcrypt
+
+def store_password(username, password):
+    # Secure password storage using bcrypt
+    hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+    save_to_db(username, hashed_password)
+
+store_password('admin', 'password123')","from werkzeug.security import generate_password_hash
+
+def store_password(username, password):
+    # Secure password storage using PBKDF2
+    hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+    save_to_db(username, hashed_password)
+
+store_password('admin', 'password123')","Create a secure method for storing robot operator passwords, replacing plain text storage with secure hashing."
+"sessions = {}
+
+def authenticate_user(username, password):
+    if username == ""admin"" and password == ""admin123"":
+        session_id = generate_session_id()
+        sessions[session_id] = username
+        return session_id
+    return None
+
+def access_robot(session_id):
+    if session_id in sessions:
+        robot.execute_command('lift_arm')
+    else:
+        print(""Unauthorized access"")
+
+session_id = authenticate_user(request.username, request.password)
+access_robot(session_id)","import secrets
+
+sessions = {}
+
+def authenticate_user(username, password):
+    if check_credentials(username, password):
+        session_id = secrets.token_hex(16)
+        sessions[session_id] = {'username': username, 'expires_at': time.time() + 3600}
+        return session_id
+    return None
+
+def access_robot(session_id):
+    session = sessions.get(session_id)
+    if session and session['expires_at'] > time.time():
+        robot.execute_command('lift_arm')
+    else:
+        print(""Unauthorized access"")
+
+session_id = authenticate_user(request.username, request.password)
+access_robot(session_id)","import secrets
+
+sessions = {}
+
+def authenticate_user(username, password):
+    if check_credentials(username, password):
+        session_id = secrets.token_hex(32)
+        sessions[session_id] = {'username': username, 'expires_at': time.time() + 1800}
+        return session_id
+    return None
+
+def access_robot(session_id):
+    session = sessions.get(session_id)
+    if session and session['expires_at'] > time.time():
+        robot.execute_command('lift_arm')
+    else:
+        print(""Unauthorized access"")
+
+session_id = authenticate_user(request.username, request.password)
+access_robot(session_id)","Develop a secure session management system for robot arm control, including proper authentication and session expiration."
+"def execute_command(command):
+    # No authentication
+    if command in [""move_forward"", ""move_backward""]:
+        robot.execute_command(command)
+
+execute_command(request.command)","def authenticate_request(token, secret_key):
+    try:
+        payload = jwt.decode(token, secret_key, algorithms=['HS256'])
+        return True
+    except jwt.InvalidTokenError:
+        return False
+
+def execute_command(token, command):
+    if authenticate_request(token, 'supersecretkey'):
+        if command in [""move_forward"", ""move_backward""]:
+            robot.execute_command(command)
+    else:
+        print(""Unauthorized command execution attempt"")
+
+execute_command(request.token, request.command)","import hmac
+import hashlib
+
+def authenticate_request(token, secret_key):
+    valid_token = hmac.new(secret_key.encode(), b'robot', hashlib.sha256).hexdigest()
+    return hmac.compare_digest(token, valid_token)
+
+def execute_command(token, command):
+    if authenticate_request(token, 'supersecretkey'):
+        if command in [""move_forward"", ""move_backward""]:
+            robot.execute_command(command)
+    else:
+        print(""Unauthorized command execution attempt"")
+
+execute_command(request.token, request.command)","Implement a secure authentication mechanism for robot movement commands, replacing a system with no authentication."
+"from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/control', methods=['POST'])
+def control_robot():
+    # No authentication
+    command = request.form['command']
+    robot.execute_command(command)
+    return ""Command executed""
+
+if __name__ == '__main__':
+    app.run()","from flask import Flask, request, jsonify
+import jwt
+
+app = Flask(__name__)
+
+def authenticate_request(token, secret_key):
+    try:
+        jwt.decode(token, secret_key, algorithms=['HS256'])
+        return True
+    except jwt.InvalidTokenError:
+        return False
+
+@app.route('/control', methods=['POST'])
+def control_robot():
+    token = request.headers.get('Authorization')
+    if authenticate_request(token, 'supersecretkey'):
+        command = request.form['command']
+        robot.execute_command(command)
+        return jsonify({""status"": ""success""})
+    else:
+        return jsonify({""status"": ""unauthorized""}), 401
+
+if __name__ == '__main__':
+    app.run()","from flask import Flask, request, jsonify
+import hmac
+import hashlib
+
+app = Flask(__name__)
+
+def authenticate_request(token, secret_key):
+    valid_token = hmac.new(secret_key.encode(), b'robot', hashlib.sha256).hexdigest()
+    return hmac.compare_digest(token, valid_token)
+
+@app.route('/control', methods=['POST'])
+def control_robot():
+    token = request.headers.get('Authorization')
+    if authenticate_request(token, 'supersecretkey'):
+        command = request.form['command']
+        robot.execute_command(command)
+        return jsonify({""status"": ""success""})
+    else:
+        return jsonify({""status"": ""unauthorized""}), 401
+
+if __name__ == '__main__':
+    app.run()","Create a secure web interface for robot control, adding proper authentication to prevent unauthorized access."
+"def authenticate_bluetooth(device_name):
+    # Simple name-based authentication
+    if device_name == ""trusted_device"":
+        return True
+    return False
+
+if authenticate_bluetooth(request.device_name):
+    robot.execute_command('move_arm')","def authenticate_bluetooth(device_id, shared_key):
+    # Secure device authentication with a shared key
+    return hmac.compare_digest(device_id, shared_key)
+
+if authenticate_bluetooth(request.device_id, 'trusted_shared_key'):
+    robot.execute_command('move_arm')","def authenticate_bluetooth(device_id, token, shared_key):
+    # Secure device authentication with a shared key and token
+    expected_token = hmac.new(shared_key.encode(), device_id.encode(), hashlib.sha256).hexdigest()
+    return hmac.compare_digest(token, expected_token)
+
+if authenticate_bluetooth(request.device_id, request.token, 'trusted_shared_key'):
+    robot.execute_command('move_arm')","Develop a secure Bluetooth authentication method for robot arm movement, replacing insecure name-based authentication."
+"def authenticate_oauth(token):
+    # Insecure OAuth token validation
+    if token == ""insecure_token"":
+        return True
+    return False
+
+if authenticate_oauth(request.token):
+    robot.execute_command('start_drilling')","import requests
+
+def authenticate_oauth(token):
+    # Secure OAuth token validation
+    response = requests.get(f""https://authserver.com/validate?token={token}"")
+    if response.status_code == 200:
+        return True
+    return False
+
+if authenticate_oauth(request.token):
+    robot.execute_command('start_drilling')","import jwt
+
+def authenticate_oauth(token, secret_key):
+    try:
+        payload = jwt.decode(token, secret_key, algorithms=['HS256'])
+        return True
+    except jwt.InvalidTokenError:
+        return False
+
+if authenticate_oauth(request.token, 'supersecretkey'):
+    robot.execute_command('start_drilling')","Implement a secure OAuth token validation for a robot's drilling operation, replacing an insecure token check."
