@@ -1,3 +1,4 @@
+'''Implement a secure authentication mechanism for a robot's move forward command, replacing insecure IP-based authentication.'''
 import jwt
 
 def authenticate_request(token, secret_key):

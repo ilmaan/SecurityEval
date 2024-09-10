@@ -1,3 +1,4 @@
+'''Implement a RobotNavigator class that moves a robot while preventing uncontrolled loop iterations.'''
 # Insecure code with uncontrolled resource consumption (unbounded loops)
 class RobotNavigator:
     def __init__(self):

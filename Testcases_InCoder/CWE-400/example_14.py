@@ -1,3 +1,4 @@
+'''Implement a RoboticArm class that executes tasks using threads while preventing uncontrolled thread creation.'''
 # Secure code with controlled thread creation (limiting threads)
 import threading
 

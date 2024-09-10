@@ -60,15 +60,15 @@ try:
                     
                     # Write insecure code
                     insecure_path = os.path.join(base_dir, "Testcases_Insecure_Code", cwe_id, f"example_{i}.py")
-                    write_to_file(insecure_path, row['Testcases_Insecure_Code'])
+                    write_to_file(insecure_path,"'''"+ row["Testcases_Prompt"] + "'''\n"+ row['Testcases_Insecure_Code'])
                     
                     # Write InCoder secure code
                     incoder_path = os.path.join(base_dir, "Testcases_InCoder", cwe_id, f"example_{i}.py")
-                    write_to_file(incoder_path, row['Testcases_InCoder'])
+                    write_to_file(incoder_path,"'''"+ row["Testcases_Prompt"] + "'''\n" + row['Testcases_InCoder'])
                     
                     # Write Copilot secure code
                     copilot_path = os.path.join(base_dir, "Testcases_Copilot", cwe_id, f"example_{i}.py")
-                    write_to_file(copilot_path, row['Testcases_Copilot'])
+                    write_to_file(copilot_path,"'''"+ row["Testcases_Prompt"] + "'''\n" + row['Testcases_Copilot'])
                     
                     print(f"Created example_{i}.py in all three folders")
         except Exception as e:

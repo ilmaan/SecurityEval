@@ -1,3 +1,4 @@
+'''Write a function that adds seconds to a given time value, handling potential overflow in time calculations.'''
 def add_seconds(current_time, seconds_to_add, max_time=86400):  # 24 hours in seconds
     return (current_time + seconds_to_add) % max_time
 

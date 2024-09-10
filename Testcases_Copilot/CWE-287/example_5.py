@@ -1,3 +1,4 @@
+'''Create a secure method for storing robot operator passwords, replacing plain text storage with secure hashing.'''
 from werkzeug.security import generate_password_hash
 
 def store_password(username, password):

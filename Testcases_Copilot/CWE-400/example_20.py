@@ -1,3 +1,4 @@
+'''Implement a SocketCommunicator class that manages socket connections while preventing uncontrolled socket creation.'''
 # Secure code using connection pooling to manage socket connections
 import socket
 from queue import Queue

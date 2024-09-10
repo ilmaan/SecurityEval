@@ -1,3 +1,4 @@
+'''Implement a processor class that handles recursive operations while preventing excessive recursion depth.'''
 # Insecure code with uncontrolled resource consumption (recursion)
 class RecursiveProcessor:
     def process(self, n):

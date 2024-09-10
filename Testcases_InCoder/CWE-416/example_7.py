@@ -1,3 +1,4 @@
+'''Create a CommandQueue class that executes commands and clears the queue safely without risking use after free of the command data.'''
 class CommandQueue:
     def __init__(self):
         self.commands = ["cmd1", "cmd2", "cmd3"]

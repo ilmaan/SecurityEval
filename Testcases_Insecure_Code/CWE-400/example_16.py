@@ -1,3 +1,4 @@
+'''Implement a RobotCommunicator class that manages socket connections while preventing uncontrolled socket creation.'''
 # Insecure code with uncontrolled resource consumption (open sockets)
 import socket
 

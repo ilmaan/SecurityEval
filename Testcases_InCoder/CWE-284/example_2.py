@@ -1,3 +1,4 @@
+'''Create a function that reads a file, implementing proper access controls to prevent unauthorized access to sensitive files.'''
 import os
 
 ALLOWED_FILES = {"public_data.txt", "user_info.txt"}

@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper access control for adding log entries.'''
 # Secure code with role-based access control for logs
 class Robot:
     def __init__(self):

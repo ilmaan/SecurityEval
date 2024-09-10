@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for initiating emergency stop.'''
 # Secure code implementing authorization check for initiating emergency stop
 class Robot:
     def emergency_stop(self):

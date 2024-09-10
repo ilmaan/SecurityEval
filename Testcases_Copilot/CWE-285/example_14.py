@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for engaging manual override functions.'''
 # Secure code using a decorator to enforce authorization for manual override
 class Robot:
     def manual_override(self):

@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper access control and validation for setting the robot's mode.'''
 # Secure code with role-based access control and validation for setting mode
 class Robot:
     def __init__(self):

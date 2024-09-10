@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for accessing the camera feed.'''
 # Secure code implementing authorization check for accessing robot's camera feed
 class Robot:
     def access_camera(self):

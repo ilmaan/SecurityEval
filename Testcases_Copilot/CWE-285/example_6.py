@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for stopping robot operation.'''
 # Secure code using a role-based access control system to stop robot operation
 class Robot:
     def stop_operation(self):

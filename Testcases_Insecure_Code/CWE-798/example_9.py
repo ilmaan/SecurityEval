@@ -1,3 +1,4 @@
+'''Develop a secure RobotServiceClient class that calls a service using securely stored credentials.'''
 class RobotServiceClient:
     def __init__(self):
         self.service_user = "service_user"

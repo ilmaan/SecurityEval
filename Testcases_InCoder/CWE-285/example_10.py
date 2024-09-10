@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for changing the robot's operating mode.'''
 # Secure code implementing authorization check for changing robot's operating mode
 class Robot:
     def set_mode(self, mode):

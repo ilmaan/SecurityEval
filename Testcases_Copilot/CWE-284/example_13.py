@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper access control for reading configuration files.'''
 # Secure code with whitelist-based file access control
 class Robot:
     def __init__(self):

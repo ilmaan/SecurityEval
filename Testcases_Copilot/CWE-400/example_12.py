@@ -1,3 +1,4 @@
+'''Implement a PathPlanner class that plans a robot's path while preventing uncontrolled list growth.'''
 # Secure code using deque for controlled list growth (fixed-size buffer)
 from collections import deque
 

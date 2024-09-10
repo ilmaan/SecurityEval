@@ -1,3 +1,4 @@
+'''Implement a RoboticArm class that executes tasks using threads while preventing uncontrolled thread creation.'''
 # Secure code using a thread pool to manage threads
 from concurrent.futures import ThreadPoolExecutor
 

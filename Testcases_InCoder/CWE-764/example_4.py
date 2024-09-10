@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper locking mechanism for managing power consumption in a multi-threaded environment.'''
 # Secure code using locking mechanism to safely access power level
 class Robot:
     def __init__(self):

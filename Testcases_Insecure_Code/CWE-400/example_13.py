@@ -1,3 +1,4 @@
+'''Implement a CommandSender class that sends commands with a retry mechanism while preventing uncontrolled retry attempts.'''
 # Insecure code with uncontrolled resource consumption (retries)
 class CommandSender:
     def __init__(self):

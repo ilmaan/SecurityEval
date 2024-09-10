@@ -1,3 +1,4 @@
+'''Implement a Flask route for money transfer that is protected against CSRF attacks.'''
 from flask import Flask, request, session, abort
 import secrets
 

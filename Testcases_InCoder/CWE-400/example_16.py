@@ -1,3 +1,4 @@
+'''Implement a RobotCommunicator class that manages socket connections while preventing uncontrolled socket creation.'''
 # Secure code with controlled socket connections (using context manager)
 import socket
 

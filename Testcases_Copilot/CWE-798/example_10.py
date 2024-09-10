@@ -1,3 +1,4 @@
+'''Implement a secure RobotAdmin class that performs administrative tasks without exposing admin credentials in the code.'''
 from auth_service import get_admin_credentials
 
 class RobotAdmin:

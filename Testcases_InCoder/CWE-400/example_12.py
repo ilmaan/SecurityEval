@@ -1,3 +1,4 @@
+'''Implement a PathPlanner class that plans a robot's path while preventing uncontrolled list growth.'''
 # Secure code with controlled list size (limiting path points)
 class PathPlanner:
     def __init__(self, max_points=100):

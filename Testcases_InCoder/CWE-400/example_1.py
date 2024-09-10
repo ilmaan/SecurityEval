@@ -1,3 +1,4 @@
+'''Implement a SensorDataCollector class that collects sensor data while preventing uncontrolled memory consumption.'''
 "# Secure code with controlled resource consumption (memory)
 class SensorDataCollector:
     def __init__(self):

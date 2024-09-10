@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for viewing data logs.'''
 # Secure code implementing authorization check for monitoring robot's data logs
 class Robot:
     def view_logs(self):

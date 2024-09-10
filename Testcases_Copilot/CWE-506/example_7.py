@@ -1,3 +1,4 @@
+'''Create a DataProcessor class for a robot that can process and clear data without any embedded malicious actions.'''
 class DataProcessor:
     def __init__(self):
         self.data = None

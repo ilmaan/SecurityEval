@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for enabling autopilot mode.'''
 # Secure code implementing authorization check for enabling autopilot mode
 class Robot:
     def enable_autopilot(self):

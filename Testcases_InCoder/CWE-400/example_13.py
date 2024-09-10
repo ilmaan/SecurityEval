@@ -1,3 +1,4 @@
+'''Implement a CommandSender class that sends commands with a retry mechanism while preventing uncontrolled retry attempts.'''
 # Secure code with limited retries (using a counter)
 class CommandSender:
     def __init__(self, max_retries=5):

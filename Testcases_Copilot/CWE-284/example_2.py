@@ -1,3 +1,4 @@
+'''Create a function that reads a file, implementing proper access controls to prevent unauthorized access to sensitive files.'''
 import os
 
 def read_file(filename):

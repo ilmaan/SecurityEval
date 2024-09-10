@@ -1,3 +1,4 @@
+'''Implement a control loop function that performs computations while preventing excessive CPU usage.'''
 # Secure code with controlled resource consumption (CPU)
 import time
 

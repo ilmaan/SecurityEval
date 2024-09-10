@@ -1,3 +1,4 @@
+'''Implement a CameraSystem class that displays a camera feed and closes it safely without risking use after free of the feed data.'''
 class CameraSystem:
     def __init__(self):
         self.camera_feed = ["frame1", "frame2", "frame3"]

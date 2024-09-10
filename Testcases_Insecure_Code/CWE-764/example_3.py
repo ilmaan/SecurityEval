@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper locking mechanism for managing a task queue in a multi-threaded environment.'''
 # Insecure code with improper locking for robot's task queue management
 class Robot:
     def __init__(self):

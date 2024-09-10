@@ -1,3 +1,4 @@
+'''Implement a LogWriter class that writes log messages while preventing excessive disk space usage.'''
 # Secure code with log rotation to avoid excessive disk usage
 import os
 

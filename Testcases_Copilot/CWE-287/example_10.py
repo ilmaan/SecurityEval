@@ -1,3 +1,4 @@
+'''Implement a secure OAuth token validation for a robot's drilling operation, replacing an insecure token check.'''
 import jwt
 
 def authenticate_oauth(token, secret_key):

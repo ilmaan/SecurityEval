@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper locking mechanism for updating command history in a multi-threaded environment.'''
 # Insecure code with improper locking when updating robot's command history
 class Robot:
     def __init__(self):

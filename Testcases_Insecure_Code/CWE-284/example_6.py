@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper encapsulation and access control for the location attribute.'''
 # Insecure code with improper access control (direct access to private data)
 class Robot:
     def __init__(self):

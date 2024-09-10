@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper access control for reading configuration files.'''
 # Insecure code with improper access control (no restrictions on file access)
 class Robot:
     def read_config(self, filepath):

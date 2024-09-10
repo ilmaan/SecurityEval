@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper access control for executing sensitive commands.'''
 # Insecure code with improper access control (no restrictions on sensitive command execution)
 class Robot:
     def __init__(self):

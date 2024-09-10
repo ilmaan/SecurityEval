@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper locking mechanism for updating sensor data in a multi-threaded environment.'''
 # Insecure code with improper locking when accessing the robot's sensor data
 class Robot:
     def __init__(self):

@@ -1,3 +1,4 @@
+'''Implement a secure authentication mechanism for robot movement commands, replacing a system with no authentication.'''
 def authenticate_request(token, secret_key):
     try:
         payload = jwt.decode(token, secret_key, algorithms=['HS256'])

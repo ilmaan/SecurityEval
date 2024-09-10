@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for adjusting sensor calibration.'''
 # Secure code using a role-based access control system for sensor calibration
 class Robot:
     def calibrate_sensors(self):

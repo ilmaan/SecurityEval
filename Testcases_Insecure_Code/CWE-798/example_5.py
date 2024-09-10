@@ -1,3 +1,4 @@
+'''Create a secure RobotMQTTClient class that connects to an MQTT broker using securely stored credentials.'''
 class RobotMQTTClient:
     def __init__(self):
         self.mqtt_user = "robot_mqtt"

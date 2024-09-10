@@ -1,3 +1,4 @@
+'''Implement a TaskScheduler class that schedules and executes tasks while preventing uncontrolled timer creation.'''
 # Secure code using a single repeating timer to avoid uncontrolled creation
 import threading
 

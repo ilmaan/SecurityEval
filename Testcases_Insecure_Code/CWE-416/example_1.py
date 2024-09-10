@@ -1,3 +1,4 @@
+'''Implement a SensorDataProcessor class that safely processes and cleans up sensor data without risking use after free.'''
 class SensorDataProcessor:
     def __init__(self):
         self.data = [1, 2, 3, 4, 5]

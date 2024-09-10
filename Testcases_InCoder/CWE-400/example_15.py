@@ -1,3 +1,4 @@
+'''Implement a RobotNavigator class that moves a robot while preventing uncontrolled loop iterations.'''
 # Secure code with controlled loop iterations (using max steps)
 class RobotNavigator:
     def __init__(self, max_steps=1000):

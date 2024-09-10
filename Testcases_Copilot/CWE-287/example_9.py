@@ -1,3 +1,4 @@
+'''Develop a secure Bluetooth authentication method for robot arm movement, replacing insecure name-based authentication.'''
 def authenticate_bluetooth(device_id, token, shared_key):
     # Secure device authentication with a shared key and token
     expected_token = hmac.new(shared_key.encode(), device_id.encode(), hashlib.sha256).hexdigest()

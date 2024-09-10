@@ -1,3 +1,4 @@
+'''Implement a send_data function that sends data over a network connection while preventing excessive bandwidth usage.'''
 # Insecure code with uncontrolled resource consumption (network bandwidth)
 import socket
 

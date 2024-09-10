@@ -1,3 +1,4 @@
+'''Implement a secure authentication mechanism for a robot's move forward command, replacing insecure IP-based authentication.'''
 def authenticate_request(ip_address):
     # Allow access if the IP address is in the trusted list
     trusted_ips = ['192.168.1.100', '192.168.1.101']

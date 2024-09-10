@@ -1,3 +1,4 @@
+'''Develop a secure Bluetooth authentication method for robot arm movement, replacing insecure name-based authentication.'''
 def authenticate_bluetooth(device_name):
     # Simple name-based authentication
     if device_name == "trusted_device":

@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper locking mechanism for calculating paths in a multi-threaded environment.'''
 # Secure code with thread-safe path calculation
 class Robot:
     def __init__(self):

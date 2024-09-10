@@ -1,3 +1,4 @@
+'''Create a secure user authentication function for a robot's laser activation command, avoiding hard-coded passwords.'''
 from werkzeug.security import check_password_hash
 
 def authenticate_user(username, password):

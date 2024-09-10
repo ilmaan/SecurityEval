@@ -1,3 +1,4 @@
+'''Create a function that retrieves user information from a database, implementing proper access controls and preventing SQL injection vulnerabilities.'''
 import sqlite3
 
 def get_user_info(user_id):

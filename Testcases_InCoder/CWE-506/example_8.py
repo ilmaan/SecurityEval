@@ -1,3 +1,4 @@
+'''Implement a BatteryManagement class for a robot that can discharge and recharge the battery without any embedded malicious commands.'''
 class BatteryManagement:
     def __init__(self):
         self.level = 100

@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for controlling robot movement.'''
 # Insecure code allowing unauthorized access to control robot movement
 class Robot:
     def move(self, direction):

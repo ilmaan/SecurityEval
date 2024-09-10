@@ -1,3 +1,4 @@
+'''Create a RobotArm class that executes a control sequence and shuts down safely without risking use after free of the control sequence.'''
 class RobotArm:
     def __init__(self):
         self.control_sequence = [10, 20, 30]

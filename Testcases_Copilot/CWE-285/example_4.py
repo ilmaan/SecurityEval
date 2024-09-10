@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for modifying the robot's configuration.'''
 # Secure code using role-based access control to manage robot's configuration
 class Robot:
     def set_config(self, config):

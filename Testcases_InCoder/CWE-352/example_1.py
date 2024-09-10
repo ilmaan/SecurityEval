@@ -1,3 +1,4 @@
+'''Implement a Flask route for money transfer that is protected against CSRF attacks.'''
 from flask import Flask, request, render_template
 from flask_wtf.csrf import CSRFProtect
 from flask_wtf import FlaskForm

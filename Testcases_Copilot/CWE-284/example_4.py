@@ -1,3 +1,4 @@
+'''Create a function that retrieves user information from a database, implementing proper access controls and preventing SQL injection vulnerabilities.'''
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker

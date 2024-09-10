@@ -1,3 +1,4 @@
+'''Implement a SocketCommunicator class that manages socket connections while preventing uncontrolled socket creation.'''
 # Insecure code with uncontrolled resource consumption (socket connections)
 import socket
 

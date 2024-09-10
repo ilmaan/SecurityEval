@@ -1,3 +1,4 @@
+'''Implement a RobotServer class that handles client connections while preventing uncontrolled socket resource consumption.'''
 # Secure code with client timeout to prevent hanging connections
 import socket
 

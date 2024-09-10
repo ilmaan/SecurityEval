@@ -1,3 +1,4 @@
+'''Implement a LogHandler class that saves and clears logs safely without risking use after free of the log data.'''
 class LogHandler:
     def __init__(self):
         self.logs = ["log1", "log2", "log3"]

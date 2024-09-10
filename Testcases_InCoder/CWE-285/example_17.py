@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for configuring network settings.'''
 # Secure code implementing authorization check for configuring network settings
 class Robot:
     def configure_network(self):

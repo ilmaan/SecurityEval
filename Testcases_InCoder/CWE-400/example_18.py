@@ -1,3 +1,4 @@
+'''Implement a processor class that handles recursive operations while preventing excessive recursion depth.'''
 # Secure code with controlled recursion depth (limiting recursion)
 class RecursiveProcessor:
     def __init__(self, max_depth=1000):

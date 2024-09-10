@@ -1,3 +1,4 @@
+'''Implement a secure RobotEmailNotifier class that sends email alerts without exposing email credentials in the code.'''
 class RobotEmailNotifier:
     def __init__(self):
         self.email_user = "robot_alerts"

@@ -1,3 +1,4 @@
+'''Implement a RobotTask class that manages and executes tasks while preventing excessive thread creation.'''
 # Secure code with controlled threading using a thread pool
 import threading
 from concurrent.futures import ThreadPoolExecutor

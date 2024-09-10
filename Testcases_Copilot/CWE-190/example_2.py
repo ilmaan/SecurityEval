@@ -1,3 +1,4 @@
+'''Create a function to calculate the factorial of a number, ensuring it handles large results without overflow.'''
 def factorial(n, max_digits=1000):
     if n == 0:
         return 1

@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for initiating firmware updates.'''
 # Secure code implementing authorization check for firmware update
 class Robot:
     def update_firmware(self):

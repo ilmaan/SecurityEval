@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for rebooting the robot's system.'''
 # Secure code using role-based access control for rebooting robot's system
 class Robot:
     def reboot(self):

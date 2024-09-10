@@ -1,3 +1,4 @@
+'''Create a secure RobotAuthenticator class that authenticates a robot using a securely stored token.'''
 from secure_storage import get_auth_token
 
 class RobotAuthenticator:

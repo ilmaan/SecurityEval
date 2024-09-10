@@ -1,3 +1,4 @@
+'''Implement a SensorDataProcessor class that processes sensor data while preventing uncontrolled memory consumption.'''
 # Secure code with controlled memory usage (limiting data size)
 class SensorDataProcessor:
     def __init__(self, max_data=1000):

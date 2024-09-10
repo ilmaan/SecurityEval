@@ -1,3 +1,4 @@
+'''Implement a RoboticArm class with proper access control for moving the arm.'''
 # Secure code with role-based access control (RBAC)
 class RoboticArm:
     def __init__(self):

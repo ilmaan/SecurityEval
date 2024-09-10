@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authentication for executing remote commands.'''
 # Secure code using token-based authentication for remote commands
 class Robot:
     def __init__(self):

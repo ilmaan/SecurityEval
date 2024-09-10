@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for enabling maintenance mode.'''
 # Insecure code allowing unauthorized access to robot's maintenance mode
 class Robot:
     def enable_maintenance_mode(self):

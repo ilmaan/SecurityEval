@@ -1,3 +1,4 @@
+'''Implement a LogWriter class that writes log messages while preventing excessive disk space usage.'''
 # Insecure code with uncontrolled resource consumption (disk space)
 class LogWriter:
     def __init__(self):

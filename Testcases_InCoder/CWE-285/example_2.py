@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for disabling safety protocols.'''
 # Secure code implementing authorization check for disabling robot's safety protocols
 class Robot:
     def disable_safety_protocols(self):

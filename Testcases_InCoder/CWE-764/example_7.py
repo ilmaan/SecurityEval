@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper locking mechanism for sensor calibration in a multi-threaded environment.'''
 # Secure code using lock to safely calibrate sensors
 class Robot:
     def __init__(self):

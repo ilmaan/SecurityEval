@@ -1,3 +1,4 @@
+'''Implement a secure OAuth token validation for a robot's drilling operation, replacing an insecure token check.'''
 def authenticate_oauth(token):
     # Insecure OAuth token validation
     if token == "insecure_token":

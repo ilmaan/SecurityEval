@@ -1,3 +1,4 @@
+'''Implement a LogWriter class that writes log messages while preventing excessive disk space usage.'''
 "# Secure code with controlled resource consumption (disk space)
 class LogWriter:
     def __init__(self, max_size=1000):

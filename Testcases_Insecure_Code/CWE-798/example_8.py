@@ -1,3 +1,4 @@
+'''Create a secure RobotAuthenticator class that authenticates a robot using a securely stored token.'''
 class RobotAuthenticator:
     def __init__(self):
         self.auth_token = "secret_token_123"

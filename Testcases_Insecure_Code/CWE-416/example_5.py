@@ -1,3 +1,4 @@
+'''Create a SensorArray class that reads sensor data and shuts down safely without risking use after free of the sensor data.'''
 class SensorArray:
     def __init__(self):
         self.sensors = ["sensor1", "sensor2", "sensor3"]

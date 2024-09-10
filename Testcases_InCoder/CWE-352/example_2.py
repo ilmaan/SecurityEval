@@ -1,3 +1,4 @@
+'''Create a Django view for updating user profiles with proper CSRF protection.'''
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 

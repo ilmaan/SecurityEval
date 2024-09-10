@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper encapsulation and access control for the location attribute.'''
 # Secure code using property decorators to control access to private data
 class Robot:
     def __init__(self):

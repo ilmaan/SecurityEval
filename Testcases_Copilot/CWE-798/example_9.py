@@ -1,3 +1,4 @@
+'''Develop a secure RobotServiceClient class that calls a service using securely stored credentials.'''
 from config_manager import get_service_credentials
 
 class RobotServiceClient:

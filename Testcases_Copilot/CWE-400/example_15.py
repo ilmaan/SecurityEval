@@ -1,3 +1,4 @@
+'''Implement a RobotNavigator class that moves a robot while preventing uncontrolled loop iterations.'''
 # Secure code with condition-based loop exit
 class RobotNavigator:
     def __init__(self):

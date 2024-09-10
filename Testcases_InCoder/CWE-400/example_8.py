@@ -1,3 +1,4 @@
+'''Implement a SensorReader class that reads sensor data from files while preventing uncontrolled file handle consumption.'''
 # Secure code with controlled file opening (using context manager)
 class SensorReader:
     def __init__(self):

@@ -1,3 +1,4 @@
+'''Implement a CommandSender class that sends commands with a retry mechanism while preventing uncontrolled retry attempts.'''
 # Secure code with exponential backoff strategy to control retries
 import time
 

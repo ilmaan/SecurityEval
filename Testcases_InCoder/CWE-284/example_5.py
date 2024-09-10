@@ -1,3 +1,4 @@
+'''Implement a RoboticArm class with proper access control for moving the arm.'''
 # Secure code with proper access control (authentication required)
 class RoboticArm:
     def __init__(self):

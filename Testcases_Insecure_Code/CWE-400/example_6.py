@@ -1,3 +1,4 @@
+'''Implement a RobotServer class that handles client connections while preventing uncontrolled socket resource consumption.'''
 # Insecure code with uncontrolled resource consumption (sockets)
 import socket
 

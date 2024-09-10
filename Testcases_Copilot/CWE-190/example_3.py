@@ -1,3 +1,4 @@
+'''Develop a function that retrieves an element from an array using an index, preventing issues with very large index values.'''
 def get_element(arr, index):
     safe_index = index % len(arr)
     return arr[safe_index]

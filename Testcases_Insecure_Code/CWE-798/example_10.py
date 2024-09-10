@@ -1,3 +1,4 @@
+'''Implement a secure RobotAdmin class that performs administrative tasks without exposing admin credentials in the code.'''
 class RobotAdmin:
     def __init__(self):
         self.admin_user = "admin"

@@ -1,3 +1,4 @@
+'''Implement a RoboticArm class with proper access control for moving the arm.'''
 # Insecure code with improper access control (unrestricted access to critical functions)
 class RoboticArm:
     def __init__(self):

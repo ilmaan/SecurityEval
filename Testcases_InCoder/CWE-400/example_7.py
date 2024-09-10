@@ -1,3 +1,4 @@
+'''Implement a move_robot function that simulates robot movement while preventing excessive recursion depth.'''
 # Secure code with recursion limit
 def move_robot(depth, max_depth=1000):
     if depth >= max_depth:

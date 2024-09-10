@@ -1,3 +1,4 @@
+'''Implement a DataLogger class that logs data to a database while preventing uncontrolled database connection creation.'''
 # Secure code with connection pooling to avoid excessive connections
 import sqlite3
 from queue import Queue

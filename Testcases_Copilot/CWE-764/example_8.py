@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper locking mechanism for checking battery level in a multi-threaded environment.'''
 # Secure code with thread-safe battery level check
 class Robot:
     def __init__(self):

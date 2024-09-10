@@ -1,3 +1,4 @@
+'''Implement a SensorDataProcessor class that processes sensor data while preventing uncontrolled memory consumption.'''
 # Secure code using deque to limit memory usage (fixed-size buffer)
 from collections import deque
 

@@ -1,3 +1,4 @@
+'''Implement a processor class that handles recursive operations while preventing excessive recursion depth.'''
 # Secure code with iterative approach to avoid deep recursion
 class IterativeProcessor:
     def process(self, n):

@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for resetting the robot's system.'''
 # Secure code implementing authorization check for resetting robot's system
 class Robot:
     def reset_system(self):

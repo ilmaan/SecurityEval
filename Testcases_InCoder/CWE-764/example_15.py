@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper locking mechanism for logging movements in a multi-threaded environment.'''
 # Secure code using lock to safely log robot's movement
 class Robot:
     def __init__(self):

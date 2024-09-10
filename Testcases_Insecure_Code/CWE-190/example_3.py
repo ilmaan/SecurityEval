@@ -1,3 +1,4 @@
+'''Develop a function that retrieves an element from an array using an index, preventing issues with very large index values.'''
 def get_element(arr, index):
     return arr[index & 0x7FFFFFFF]  # Simulate 31-bit unsigned int overflow
 

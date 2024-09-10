@@ -1,3 +1,4 @@
+'''Implement a Robot class with proper authorization checks for changing the robot's speed settings.'''
 # Secure code using a role-based access control system for setting robot's speed
 class Robot:
     def set_speed(self, speed):

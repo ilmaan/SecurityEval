@@ -1,3 +1,4 @@
+'''Write a function that adds seconds to a given time value, handling potential overflow in time calculations.'''
 def add_seconds(current_time, seconds_to_add):
     return (current_time + seconds_to_add) & 0xFFFFFFFF  # Simulate 32-bit unsigned int overflow
 

@@ -1,3 +1,4 @@
+'''Implement a NetworkRequester class that makes network requests while preventing uncontrolled request frequency.'''
 # Secure code with controlled network requests (limiting retries)
 import requests
 
