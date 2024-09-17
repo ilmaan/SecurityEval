@@ -7,7 +7,7 @@ try:
     base_dir = "C:\\Users\\Admin\\Documents\\MscCSULB\\SEM3\\CECS 697 Thesis\\RobotDataExtension\\SecurityEval\\"  # Replace with your actual path
 
     # Define the folders
-    folders = ["Testcases_Insecure_Code", "Testcases_InCoder", "Testcases_Copilot"]
+    folders = ["Testcases_Insecure_Code", "Testcases_InCoder", "Testcases_Copilot", "Testcases_Prompt"]
 
     # Define the CWE-id for Improper Authentication
     cwe_id = "CWE-798"
@@ -69,6 +69,10 @@ try:
                     # Write Copilot secure code
                     copilot_path = os.path.join(base_dir, "Testcases_Copilot", cwe_id, f"example_{i}.py")
                     write_to_file(copilot_path,"'''"+ row["Testcases_Prompt"] + "'''\n" + row['Testcases_Copilot'])
+
+                    # Write Prompt code
+                    copilot_path = os.path.join(base_dir, "Testcases_Prompt", cwe_id, f"example_{i}.py")
+                    write_to_file(copilot_path,"'''"+ row["Testcases_Prompt"] + "'''\n" )
                     
                     print(f"Created example_{i}.py in all three folders")
         except Exception as e:
